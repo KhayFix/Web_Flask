@@ -11,7 +11,7 @@ def get_html(url):
         print("Сетевая ошибка")
         return False
 
-
+# Парсер страницы https://www.python.org
 def get_python_news():
     try:
         html = get_html("https://www.python.org/blogs/")
@@ -21,9 +21,9 @@ def get_python_news():
             all_news = all_news.findAll('li')
             result_news = []
             for news in all_news:
-                title = news.find('a').text  # получили текст из тега <a>
-                url = news.find('a')['href']  # получаем ссылку, к атрибутам обращаемся как к элементам словаря
-                published = news.find('time').text  # тут получаем дату публикации нашей новости
+                title = news.find('a').text
+                url = news.find('a')['href']
+                published = news.find('time').text
                 result_news.append({
                     "title": title,
                     "url": url,
@@ -34,13 +34,3 @@ def get_python_news():
     except AttributeError:
         print("Объект не найден")
     return False
-    # all_news = soup.findAll('ul')# возвращает все ul теги
-    # all_news = soup.find('ul')# возвращает первые ul теги
-
-
-
-
-# код для скачивания html страницы
-# if html:
-#     with open("python.org.html", "w", encoding="utf-8") as f:
-#         f.write(html)

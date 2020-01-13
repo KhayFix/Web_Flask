@@ -21,7 +21,9 @@
             {% endfor %}
         </div>
         <div class="col-4">
-            <h2>Прогноз погоды</h2>
+            <h2>Прогноз погоды:<br>
+                В Екатеринбурге
+            </h2>
             {% if weather %}
             Температура: {{ weather.temp_C }}, ощущается как: {{weather.FeelsLikeC}}
             {% else %}

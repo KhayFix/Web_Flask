@@ -1,7 +1,7 @@
 from flask import Flask, flash, render_template, redirect, url_for
 from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 
-from webapp.froms import LoginForm
+from webapp.forms import LoginForm
 from webapp.model import db, News, User
 from webapp.weather import weather_by_city
 

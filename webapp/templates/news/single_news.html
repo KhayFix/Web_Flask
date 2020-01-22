@@ -1,0 +1,14 @@
+<!--Наследование от "base.html" -->
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-8 news-content">
+            {{news_lists.text|safe}}
+        </div>
+        <div class="col-4">
+            <h2>Другие новости</h2>
+
+        </div>
+    </div>
+{% endblock %}

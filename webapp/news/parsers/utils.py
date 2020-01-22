@@ -18,10 +18,10 @@ def get_html(url):
         return False
 
 
-def save_news(title, url, published):
+def save_news(title, url, published, author_published=None):
     news_exists = News.query.filter(News.url == url).count()
     print(news_exists)
     if not news_exists:
-        news_news = News(title=title, url=url, published=published)
+        news_news = News(title=title, url=url, published=published, author_published=author_published)
         db.session.add(news_news)
         db.session.commit()

@@ -5,6 +5,8 @@ import platform
 from bs4 import BeautifulSoup
 
 from webapp.news.parsers.utils import get_html, save_news
+from webapp.db import db
+from webapp.news.models import News
 
 # выставляем русскоязычную локаль для распознования даты
 if platform.system() == 'Windows':
@@ -41,7 +43,7 @@ def parse_habr_date(date_str: str):
 
 
 # Парсер страницы https://habr.com/
-def get_habr_snippets():
+def get_news_snippets():
     html = get_html("https://habr.com/ru/search/?target_type=posts&q=python&order_by=date")
     if html:
         soup = BeautifulSoup(html, "html.parser")
@@ -54,8 +56,25 @@ def get_habr_snippets():
             published = parse_habr_date(published)
             author_published = news.find('a', class_='post__user-info')['href']
 
-            save_news(title, url, published)
+            save_news(title, url, published, author_published)
+
+
+def get_news_content():
+    news_without_text = News.query.filter(News.text.is_(None))
+    for news in news_without_text:
+        html = get_html(news.url)
+        try:
+            if html:
+                soup = BeautifulSoup(html, "html.parser")
+                # Для получения именно html используем .decode_contents() а не .text
+                news_text = soup.find('div', class_='post__text-html').decode_contents()
+                if news_text:
+                    news.text = news_text
+                    db.session.add(news)
+                    db.session.commit()
+        except AttributeError:
+            print("Данных <div class='post__text-html' нет на странице")
 
 
 if __name__ == "__main__":
-    get_habr_snippets()
+    get_news_content()

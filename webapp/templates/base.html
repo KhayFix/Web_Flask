@@ -8,6 +8,11 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <!--Подключение библиотеки highlight.js для удобного отображения кода на странице -->
+        <link rel="stylesheet"
+              href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/androidstudio.min.css">
+        <!--  Подключение своих стилей css -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
         <title>{{ page_title }}</title>
     </head>
@@ -17,7 +22,7 @@
     <div class="container">
         <h1>{{ page_title }}</h1>
     <!--  В это место подключаются остальные html страницы      -->
-        {% block content %} {% endblock %}
+        {% block content %}{% endblock %}
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -30,5 +35,8 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
+    <!-- библиотека highlight.js   -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     </body>
 </html>

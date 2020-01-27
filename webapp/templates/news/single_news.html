@@ -4,11 +4,24 @@
 {% block content %}
     <div class="row">
         <div class="col-8 news-content">
-            {{news_lists.text|safe}}
+            {{ news_lists.text|safe }}
+            {% if news_lists.comments %}
+                <h3>Комментарии:</h3>
+                {% for comment in news_lists.comments %}
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-text">{{ comment.text }}</p>
+                        <p class="card-text">
+                            <small>Опубликовано: {{ comment.created.strftime('%d.%m.%Y') }} |
+                                Автор: {{ comment.user.username }}</small>
+                        </p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
         </div>
         <div class="col-4">
             <h2>Другие новости</h2>
-
         </div>
     </div>
 {% endblock %}

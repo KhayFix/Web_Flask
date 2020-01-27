@@ -15,8 +15,9 @@
             {% endwith %}
             <h2>{{ page_title[:7] }}</h2>
             {% for news in news_lists %}
+            <a href="{{ news.author_published }}"> Автор публикации: {{ news.author_published }}</a>
             <h3><a href="{{ url_for('news.single_news', news_id=news.id) }}"> {{ news.title }}</a></h3>
-            <p> {{ news.published.strftime('%d.%m.%Y') }}</p>
+            <p> {{ news.published.strftime('%d.%m.%Y') }} | Комментарии: {{ news.comments_count() }}</p>
             <hr/>
             {% endfor %}
         </div>

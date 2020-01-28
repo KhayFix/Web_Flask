@@ -13,7 +13,7 @@
               href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/androidstudio.min.css">
         <!--  Подключение своих стилей css -->
         <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-
+        <link rel="stylesheet" href="{{ url_for('static', filename='normalize.css') }}">
         <title>{{ page_title }}</title>
     </head>
     <body>
@@ -24,6 +24,15 @@
     <!--  В это место подключаются остальные html страницы      -->
         {% block content %}{% endblock %}
     </div>
+    {% block footer %}
+        <div class="footer" >
+            <div class="w-auto p-3 navbar-dark bg-dark">
+                <div class="container" >
+                    <a href="https://github.com/KhayFix/Web_Flask" class="text-white">© Copyright 2019 KhayFix/github.com</a>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

@@ -32,8 +32,10 @@
                 </form>
             {% else %}
                 <p>
-                    <a href="{{ url_for('user.login', next=request.full_path) }}"> Авторизируйтесь</a>
-                    чтобы добавить комментарий к статье
+                    <a class="btn btn-outline-success" href="{{ url_for('user.login', next=request.full_path) }}">
+                        Авторизируйтесь
+                    </a>
+                    чтобы добавить комментарий к данной статье
                 </p>
             {% endif %}
         </div>

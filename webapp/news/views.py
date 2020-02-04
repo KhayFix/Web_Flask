@@ -11,11 +11,23 @@ blueprint = Blueprint('news', __name__)
 
 
 @blueprint.route('/')
+@blueprint.route('/home')
 def index():
     title = "Новости Python"
     weather = weather_by_city(current_app.config['WEATHER_DEFAULT_CITY'])
-    news = News.query.filter(News.text.isnot(None)).order_by(News.published.desc()).all()
-    return render_template('news/index.html', page_title=title, weather=weather, news_lists=news)
+    page = request.args.get('page', 1, type=int)
+    news = News.query.filter(News.text.isnot(None)).order_by(News.published.desc()).paginate(
+        page, 7, False)
+
+    # news = News.query.filter(News.text.isnot(None)).order_by(News.published.desc()).all()
+    # часть кода отвечающая за отображения колличества новостей на странице
+    next_url = url_for('news.index', page=news.next_num) \
+        if news.has_next else None
+    prev_url = url_for('news.index', page=news.prev_num) \
+        if news.has_prev else None
+
+    return render_template('news/index.html', page_title=title, weather=weather, news_lists=news,
+                           next_url=next_url, prev_url=prev_url)
 
 
 @blueprint.route('/news/<int:news_id>')

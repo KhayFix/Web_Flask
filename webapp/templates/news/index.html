@@ -6,12 +6,41 @@
         <div class="col-8">
             {% include('messages.html') %}
             <h2>{{ page_title[:7] }}</h2>
-            {% for news in news_lists %}
+            {% for news in news_lists.items %}
             <a href="{{ news.author_published }}"> Автор публикации: {{ news.author_published }}</a>
             <h3><a href="{{ url_for('news.single_news', news_id=news.id) }}"> {{ news.title }}</a></h3>
             <p> {{ news.published.strftime('%d.%m.%Y') }} | Комментарии: {{ news.comments_count() }}</p>
             <hr/>
             {% endfor %}
+            <!-- часть кода отвечающая за отображения кнопок(пагинация) и переключения новостей на странице-->
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                    {% if prev_url %}
+                    <a type="button" class="btn btn-dark mb-4" href="{{ prev_url }}">Назад</a>
+                    {% endif %}
+                </div>
+                <div class="btn-group mr-2" role="group" aria-label="Second group">
+                {% for page_num in news_lists.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
+                    {% if page_num %}
+                        {% if news_lists.page == page_num %}
+                            <a  class="btn btn-dark mb-4"
+                                href="{{ url_for('news.index', page=page_num) }}">{{ page_num }}</a>
+                        {%else%}
+                            <a  class="btn btn-outline-dark mb-4"
+                                href="{{ url_for('news.index', page=page_num) }}">{{ page_num }}</a>
+                        {% endif%}
+                    {%else%}
+                        . . .
+                    {% endif%}
+                {% endfor %}
+                </div>
+                <div class="btn-group" role="group" aria-label="Third group">
+                    {% if next_url %}
+                    <a type="button" class="btn btn-dark mb-4" href="{{ next_url }}">Дальше</a>
+                    {% endif %}
+                </div>
+            </div>
+
         </div>
         <div class="col-4">
             <h2>Прогноз погоды:<br>
@@ -24,4 +53,4 @@
             {% endif %}
         </div>
     </div>
-{% endblock %}
+{% endblock content %}

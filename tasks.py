@@ -2,7 +2,7 @@ from celery import Celery
 from celery.schedules import crontab
 
 from webapp import create_app
-from webapp.python_org_news import get_python_news
+from webapp.news.parsers.python_org_news import get_python_news
 from webapp.news.parsers import habr
 
 flask_app = create_app()

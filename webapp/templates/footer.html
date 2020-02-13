@@ -1,28 +1,28 @@
 {% block footer %}
-<footer class="page-footer font-small unique-color-dark pt-4">
-<div class="w-auto p-3 navbar-dark bg-dark">
-    <div class="container" >
-        <ul class="list-unstyled list-inline text-center py-2">
-            {% if current_user.is_authenticated %}
-            <li class="list-inline-item">
-                <h5 class="mb-1 text-white">Привет, {{ current_user.username }}</h5>
-            </li>
-            {% else %}
-            <li class="list-inline-item">
-                <h5 class="mb-1 text-white">Бесплатная регистрация</h5>
-            </li>
-            <li class="list-inline-item">
-                <a class="btn btn-outline-danger" type="button" href="{{ url_for('user.register') }}"  >
-                    Зарегистрироваться!
-                </a>
-            </li>
-            {% endif%}
-        </ul>
-        <div class="footer-copyright text-center py-1 text-white">© 2020 Авторские права:
-            <a href="https://github.com/KhayFix/Web_Flask" class="text-white"> KhayFix/github.com</a>
+<footer class="page-footer font-small unique-color-dark pt-4 sticky-footer">
+    <div class="w-auto p-3 navbar-dark bg-dark">
+        <div class="container" >
+            <ul class="list-unstyled list-inline text-center py-2">
+                {% if current_user.is_authenticated %}
+                <li class="list-inline-item">
+                    <h5 class="mb-1 text-white">Привет, {{ current_user.username }}</h5>
+                </li>
+                {% else %}
+                <li class="list-inline-item">
+                    <h5 class="mb-1 text-white">Бесплатная регистрация</h5>
+                </li>
+                <li class="list-inline-item">
+                    <a class="btn btn-outline-danger" type="button" href="{{ url_for('user.register') }}"  >
+                        Зарегистрироваться!
+                    </a>
+                </li>
+                {% endif%}
+            </ul>
+            <div class="footer-copyright text-center py-1 text-white">© 2020 Авторские права:
+                <a href="https://github.com/KhayFix/Web_Flask" class="text-white"> KhayFix/github.com</a>
+            </div>
         </div>
     </div>
-</div>
 </footer>
 {% endblock %}
 

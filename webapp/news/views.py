@@ -19,8 +19,7 @@ def index():
     news = News.query.filter(News.text.isnot(None)).order_by(News.published.desc()).paginate(
         page, 7, False)
 
-    # news = News.query.filter(News.text.isnot(None)).order_by(News.published.desc()).all()
-    # часть кода отвечающая за отображения колличества новостей на странице
+    # часть кода отвечающая за отображения кнопок дальше и назад
     next_url = url_for('news.index', page=news.next_num) \
         if news.has_next else None
     prev_url = url_for('news.index', page=news.prev_num) \
